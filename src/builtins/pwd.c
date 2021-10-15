@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:32:32 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:38:47 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/14 20:58:15 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define CWD_BUFFER_SIZE (2048)
+#define CWD_BUFFER_SIZE (4096)
 
 void	ft_pwd(t_node *node)
 {
