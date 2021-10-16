@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:33:13 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:35:22 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:54:08 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	ft_cd(t_node *node)
 {
 	if (ft_strarr_size(node->argv) > 1)
 	{
+		if (ft_strarr_size(node->argv) > 2)
+		{
+			pset_err(CD, NULL, TOO_MANY_ARGS, GENERIC_ERR);
+			return ;
+		}
 		if (chdir(node->argv[1]) == -1)
 		{
 			pset_err(CD, strerror(errno), node->argv[1], GENERIC_ERR);

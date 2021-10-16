@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:36:30 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:38:26 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 17:22:06 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ static void	add_var(const char *var)
 	ft_str_free(var_cpy);
 }
 
+static void	print_env(void)
+{
+	char	**copy;
+	size_t	i;
+
+	copy = ft_strarr_dup(g_mini.env);
+	ft_strarr_sort(copy);
+	i = 0;
+	while (copy[i])
+		ft_putendl_fd(copy[i++], STDOUT_FILENO);
+	ft_strarr_free(copy);
+}
+
 void	ft_export(t_node *node)
 {
 	size_t	i;
@@ -34,7 +47,7 @@ void	ft_export(t_node *node)
 	g_mini.code = SUCCESS;
 	if (ft_strarr_size(node->argv) == 1)
 	{
-		ft_env(node);
+		print_env();
 		return ;
 	}
 	var = NULL;
