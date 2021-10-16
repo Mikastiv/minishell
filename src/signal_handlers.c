@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:13 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 16:04:10 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 18:27:57 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,18 @@ void	stop_heredoc(int signal)
 
 void	process_exit_status(int wstatus)
 {
-	if (WIFEXITED(wstatus))
-		g_mini.code = WEXITSTATUS(wstatus);
 	if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGQUIT)
 	{
 		ft_putstr_fd("Quit\n", STDOUT_FILENO);
 		g_mini.code = QUIT_SIG;
 	}
-	if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
+	else if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		g_mini.code = INTERRUPT_SIG;
 	}
+	else if (WIFEXITED(wstatus))
+		g_mini.code = WEXITSTATUS(wstatus);
+	else
+		g_mini.code = GENERIC_ERR;
 }
