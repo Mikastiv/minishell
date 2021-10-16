@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:32:32 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/14 20:58:15 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:18:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 #include <string.h>
 #include <stdio.h>
 
-#define CWD_BUFFER_SIZE (4096)
+#ifdef __linux__
+# include <linux/limits.h>
+#endif
+
+#ifdef __APPLE__
+# include <limits.h>
+#endif
 
 void	ft_pwd(t_node *node)
 {
-	char	cwd[CWD_BUFFER_SIZE];
+	char	cwd[PATH_MAX];
 
 	(void)node;
-	if (getcwd(cwd, CWD_BUFFER_SIZE) != NULL)
+	if (getcwd(cwd, PATH_MAX) != NULL)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 	else
 	{
