@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/11 15:41:28 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 15:33:03 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,14 @@ void	ft_cmd(t_node *node)
 		pset_err(SHELL_NAME, NULL, strerror(errno), GENERIC_ERR);
 		return ;
 	}
-	signal(SIGINT, child_proc_interrupt);
-	signal(SIGQUIT, child_proc_quit);
+	signal(SIGINT, nothing);
+	signal(SIGQUIT, nothing);
 	if (pid == 0)
 		exec_binary(path, node->argv);
 	waitpid(pid, &wstatus, 0);
 	signal(SIGINT, newline);
 	signal(SIGQUIT, SIG_IGN);
 	ft_setenv("_", path);
-	if (WIFEXITED(wstatus))
-		g_mini.code = WEXITSTATUS(wstatus);
+	process_exit_status(wstatus);
 	free(path);
 }

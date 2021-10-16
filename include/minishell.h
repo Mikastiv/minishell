@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:33:08 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:36:28 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:05:57 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define NO_HOME "HOME not set"
 # define UNCLOSED_QUOTES "found unclosed quotes"
 # define UNCLOSED_DQUOTES "found unclosed double quotes"
+# define WARNING "warning"
+# define HEREDOC_EOF "here-document was delimited by end-of-file"
 
 # define ENV_PWD "PWD"
 # define ENV_OLDPWD "OLDPWD"
@@ -57,7 +59,8 @@ void	pset_err(const char *prg, const char *v1, const char *v2, int err);
 void	unexpected_token(const char *token);
 
 void	newline(int signal);
-void	child_proc_quit(int signal);
-void	child_proc_interrupt(int signal);
+void	nothing(int signal);
+void	stop_heredoc(int signal);
+void	process_exit_status(int wstatus);
 
 #endif

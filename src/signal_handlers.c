@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:13 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/09/21 01:07:22 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:04:10 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 
 void	newline(int signal)
 {
@@ -26,16 +27,30 @@ void	newline(int signal)
 	g_mini.code = INTERRUPT_SIG;
 }
 
-void	child_proc_interrupt(int signal)
+void	nothing(int signal)
+{
+	(void)signal;
+}
+
+void	stop_heredoc(int signal)
 {
 	(void)signal;
 	ft_putstr_fd("\n", STDOUT_FILENO);
-	g_mini.code = INTERRUPT_SIG;
+	exit(INTERRUPT_SIG);
 }
 
-void	child_proc_quit(int signal)
+void	process_exit_status(int wstatus)
 {
-	(void)signal;
-	ft_putstr_fd("Quit\n", STDOUT_FILENO);
-	g_mini.code = QUIT_SIG;
+	if (WIFEXITED(wstatus))
+		g_mini.code = WEXITSTATUS(wstatus);
+	if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGQUIT)
+	{
+		ft_putstr_fd("Quit\n", STDOUT_FILENO);
+		g_mini.code = QUIT_SIG;
+	}
+	if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		g_mini.code = INTERRUPT_SIG;
+	}
 }

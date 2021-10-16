@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 01:31:53 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/08 22:38:06 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:08:24 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-static void	stop_heredoc(int signal)
+static void	print_warning(const char *delim)
 {
-	(void)signal;
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	exit(INTERRUPT_SIG);
+	t_string	msg;
+
+	msg = ft_str_new_copy(HEREDOC_EOF);
+	ft_str_append_cstr(msg, " (wanted '");
+	ft_str_append_cstr(msg, delim);
+	ft_str_append_cstr(msg, "')");
+	pset_err(SHELL_NAME, WARNING, ft_str_data(msg), SUCCESS);
+	ft_str_free(msg);
 }
 
-static void	exec_heredoc(const char *limiter, int *heredoc_fd)
+static void	exec_heredoc(const char *delim, int *heredoc_fd)
 {
 	char	*line;
 
@@ -32,7 +37,7 @@ static void	exec_heredoc(const char *limiter, int *heredoc_fd)
 	line = readline("> ");
 	while (line)
 	{
-		if (ft_strcmp(line, limiter) == 0)
+		if (ft_strcmp(line, delim) == 0)
 		{
 			close(heredoc_fd[1]);
 			close(heredoc_fd[0]);
@@ -42,6 +47,8 @@ static void	exec_heredoc(const char *limiter, int *heredoc_fd)
 		free(line);
 		line = readline("> ");
 	}
+	if (!line)
+		print_warning(delim);
 	free(line);
 	exit(SUCCESS);
 }
@@ -52,7 +59,7 @@ static bool	redir_heredoc(t_redir *redir, int fd, bool last)
 	pid_t	pid;
 	int		wstatus;
 
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, nothing);
 	pipe(heredoc_fd);
 	pid = fork();
 	if (pid == -1)
