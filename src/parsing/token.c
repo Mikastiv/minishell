@@ -6,11 +6,11 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 20:37:15 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/09/28 09:46:22 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:27:51 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "token.h"
 
 t_type	get_type(t_string token)
 {

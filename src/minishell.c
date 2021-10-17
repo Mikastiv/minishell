@@ -6,13 +6,14 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 23:08:05 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:23:38 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parse.h"
 #include "exec.h"
+#include "signals.h"
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>

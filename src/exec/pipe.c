@@ -6,13 +6,14 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:18:50 by laube             #+#    #+#             */
-/*   Updated: 2021/10/08 22:57:39 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:29:44 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "tokenizer.h"
+#include "node.h"
 #include "minishell.h"
+#include "errors.h"
 #include <sys/stat.h>
 #include <string.h>
 

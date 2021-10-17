@@ -12,12 +12,13 @@ FTDIR		=	libft
 LIBFT		=	ft
 MAKELIBFT	=	$(MAKE) -C $(FTDIR)
 
-HFILES		=	tokenizer.h parse.h node.h exec.h minishell.h builtin.h
+HFILES		=	tokenizer.h parse.h node.h exec.h minishell.h builtin.h errors.h\
+				environment.h signals.h token.h
 BUILTIN_C	=	cd.c echo.c env.c exit.c export.c pwd.c unset.c
 PARSING_C	=	interpolation.c interpolation2.c parse.c syntax.c token.c\
 				tokenizer.c tokenizer_utils.c
 EXEC_C		=	cmd.c exec.c pipe.c redir.c heredoc.c pipe_utils.c
-CFILES		=	main.c node.c eprint.c environment.c signal_handlers.c minishell.c
+CFILES		=	main.c node.c eprint.c environment.c signals.c minishell.c
 
 BUILTIN_DIR	=	$(SRC)/builtins
 PARSING_DIR	=	$(SRC)/parsing

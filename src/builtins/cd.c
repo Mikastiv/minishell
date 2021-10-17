@@ -6,12 +6,14 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:33:13 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 16:54:08 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:24:17 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+#include "errors.h"
+#include "environment.h"
 #include <string.h>
 #include <sys/errno.h>
 #include <stdlib.h>

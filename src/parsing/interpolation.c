@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 18:56:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:40:54 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:26:52 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "minishell.h"
+#include "environment.h"
 #include <stdlib.h>
 
 static void	add_status_code(t_string out)

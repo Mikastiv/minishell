@@ -6,13 +6,16 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 01:31:53 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:07:36 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:17:21 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
 #include "parse.h"
+#include "errors.h"
+#include "signals.h"
+#include "token.h"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <signal.h>

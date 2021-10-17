@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:34:03 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:37:07 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:25:14 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+#include "errors.h"
 #include <stdio.h>
 
 void	ft_env(t_node *node)

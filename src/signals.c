@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handlers.c                                  :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:13 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 18:27:57 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:32:19 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "signals.h"
 #include "minishell.h"
+#include "errors.h"
+#include <libft/libft.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>

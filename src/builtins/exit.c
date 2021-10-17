@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:08:24 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 22:31:46 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:25:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+#include "errors.h"
 #include <string.h>
 #include <sys/wait.h>
 #include <stdlib.h>

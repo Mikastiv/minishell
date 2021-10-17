@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:14:49 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/09/21 05:17:18 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:28:12 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 #include "minishell.h"
+#include "errors.h"
 #include <stdlib.h>
 
 void	init_tokenizer(t_tokenizer *tok)

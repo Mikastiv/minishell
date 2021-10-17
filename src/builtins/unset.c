@@ -6,12 +6,14 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:34:45 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/09/20 03:57:10 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:26:36 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+#include "errors.h"
+#include "environment.h"
 
 static void	remove_var(const char *var)
 {

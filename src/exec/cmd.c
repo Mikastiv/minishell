@@ -6,12 +6,15 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/16 15:33:03 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:29:04 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "errors.h"
+#include "signals.h"
+#include "environment.h"
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <stdlib.h>

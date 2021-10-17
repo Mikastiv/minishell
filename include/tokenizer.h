@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:15:12 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/06 21:54:54 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:15:28 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,6 @@
 # include <libft/libft.h>
 
 # define OP ">|<"
-
-typedef enum e_type
-{
-	PIPE,
-	OUTPUT,
-	APPEND,
-	INPUT,
-	HEREDOC,
-	STRING,
-}	t_type;
-
-t_type	get_type(t_string token);
-bool	is_redirection(t_type type);
 
 typedef enum e_state
 {

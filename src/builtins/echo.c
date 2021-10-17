@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:31:35 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/09/21 00:24:53 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:24:40 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+#include "errors.h"
 #include <stdio.h>
 
 void	ft_echo(t_node *node)

@@ -6,13 +6,15 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 01:43:42 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 15:36:45 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:19:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "errors.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <libft/libft.h>
 
 void	pset_err(const char *prg, const char *v1, const char *v2, int err)
 {

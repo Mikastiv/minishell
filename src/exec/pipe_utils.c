@@ -6,11 +6,12 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 23:03:30 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/08 23:04:10 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:30:35 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "node.h"
 
 void	fd_reset(void)
 {

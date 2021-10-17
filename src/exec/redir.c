@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:22:42 by laube             #+#    #+#             */
-/*   Updated: 2021/10/08 22:57:22 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:30:00 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "errors.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>

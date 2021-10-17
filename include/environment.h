@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node.h                                             :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 18:28:14 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:18:38 by mleblanc         ###   ########.fr       */
+/*   Created: 2021/10/17 00:10:31 by mleblanc          #+#    #+#             */
+/*   Updated: 2021/10/17 00:20:22 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NODE_H
-# define NODE_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 
-# include "tokenizer.h"
-# include "token.h"
+# include <stdbool.h>
 
-typedef struct s_redir
-{
-	t_type	type;
-	char	*file;
-}	t_redir;
-
-typedef struct s_node
-{
-	char			**argv;
-	t_list			*redirs;
-	int				fd[2];
-	struct s_node	*next;
-	struct s_node	*prev;
-}	t_node;
-
-void		nodeclear(t_node **node);
-void		nodeadd_back(t_node **lst, t_node *new);
-t_node		*nodelast(t_node *lst);
-t_node		*nodenew(void);
+char	*ft_getenv(const char *var);
+void	ft_setenv(const char *var, const char *value);
+char	*var_name(const char *var);
+bool	is_valid_var_name(const char *var);
 
 #endif
