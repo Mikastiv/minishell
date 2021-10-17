@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:42:47 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 02:18:04 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 03:53:15 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environment.h"
 #include <libft/libft.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #ifdef __linux__
 # include <linux/limits.h>
@@ -25,14 +26,27 @@
 
 static char	*getcwd_dir(void)
 {
-	char	cwd[PATH_MAX];
-	char	*home;
+	char		cwd[PATH_MAX];
+	char		*home;
+	t_string	str;
+	struct stat	buf;
 
 	if (getcwd(cwd, PATH_MAX) == NULL)
 		return (ft_strdup(""));
 	home = ft_getenv("HOME");
 	if (home && ft_strnstr(cwd, home, ft_strlen(home)))
-		return (ft_strjoin("~", cwd + ft_strlen(home)));
+	{
+		if (home[ft_strlen(home) - 1] == '/')
+			return (ft_strdup(cwd));
+		str = ft_str_new_copy(home);
+		ft_str_add_back(str, '/');
+		ft_str_append_cstr(str, cwd + ft_strlen(home));
+		if (stat(ft_str_data(str), &buf) != -1)
+		{
+			ft_str_free(str);
+			return (ft_strjoin("~", cwd + ft_strlen(home)));
+		}
+	}
 	return (ft_strdup(cwd));
 }
 
