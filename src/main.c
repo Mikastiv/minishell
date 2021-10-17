@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:03:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 20:23:00 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:58:21 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int argc, char **argv, char **env)
 	minishell_init(env);
 	if (argc > 1 && ft_strncmp(argv[1], "-c", 3) == 0)
 		execute_cmd(get_cmd(argv));
+	else if (argc > 1)
+		pset_err(SHELL_NAME, argv[1], UNSUPPORTED_ARG_OPT, GENERIC_ERR);
 	else
 	{
 		minishell_loop();

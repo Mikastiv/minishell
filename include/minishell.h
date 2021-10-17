@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:33:08 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 20:00:58 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:58:15 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define WARNING "warning"
 # define HEREDOC_EOF "here-document was delimited by end-of-file"
 # define C_FLAG_ARG_REQ "option requires an argument"
+# define UNSUPPORTED_ARG_OPT "unsupported argument or option"
 
 # define ENV_PWD "PWD"
 # define ENV_OLDPWD "OLDPWD"
