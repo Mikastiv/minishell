@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 19:56:30 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 23:08:05 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*get_line(char *line)
 {
 	char	*tmp;
 
-	line = readline(SHELL_NAME"% ");
+	line = readline("\001"FT_BOLD FT_BRED"\002"SHELL_NAME"\001"FT_RST"\002% ");
 	if (!line)
 	{
 		g_mini.code = 0;
