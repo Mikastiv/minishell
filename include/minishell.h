@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:33:08 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:25:02 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:49:49 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 typedef struct s_minishell
 {
 	char		**env;
+	char		*user;
+	char		*hostname;
 	uint32_t	code;
 	int			stdin_fd;
 	int			stdout_fd;
@@ -38,5 +40,6 @@ extern t_minishell	g_mini;
 void	minishell_init(char *const *env);
 void	minishell_loop(void);
 void	minishell_destroy(void);
+char	*get_prompt(void);
 
 #endif
