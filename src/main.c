@@ -6,93 +6,67 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:03:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/11 23:53:36 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 20:06:46 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
 #include "minishell.h"
 #include "parse.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdbool.h>
-#include <signal.h>
+#include "exec.h"
 
 t_minishell	g_mini;
 
-static void	minishell_init(char **env)
+static const char	*get_cmd(char *const *argv)
 {
-	g_mini.env = ft_strarr_dup(env);
-	g_mini.code = 0;
-	g_mini.stdin_fd = dup(STDIN_FILENO);
-	g_mini.stdout_fd = dup(STDOUT_FILENO);
-	signal(SIGINT, newline);
-	signal(SIGQUIT, SIG_IGN);
-}
+	size_t	i;
 
-static char	*get_line(char *line)
-{
-	char	*tmp;
-
-	line = readline(SHELL_NAME"% ");
-	if (!line)
+	i = 1;
+	while (argv[i])
 	{
-		g_mini.code = 0;
-		return (NULL);
+		if (ft_strncmp(argv[i], "-c", 3) != 0)
+			return (argv[i]);
+		++i;
 	}
-	tmp = ft_strtrim(line, WHITESPACE);
-	free(line);
-	line = tmp;
-	if (*line)
-		add_history(line);
-	return (line);
+	return (NULL);
 }
 
-static void	free_memory(t_list **tokens, t_node **cmds, char *line)
-{
-	ft_lstclear(tokens, ft_str_free);
-	nodeclear(cmds);
-	free(line);
-}
-
-static void	minishell_loop(void)
+static void	execute_cmd(const char *cmd)
 {
 	t_tokenizer	tok;
 	t_list		*tokens;
 	t_node		*cmds;
 
-	tok.str = NULL;
-	cmds = NULL;
-	tokens = NULL;
-	while (true)
+	if (!cmd)
 	{
-		init_tokenizer(&tok);
-		tok.str = get_line(tok.str);
-		if (!tok.str)
-			return ;
-		if (!*tok.str)
-		{
-			free(tok.str);
-			continue ;
-		}
-		tokens = tokenize(&tok);
-		cmds = parse(tokens);
-		process_cmd(cmds);
-		free_memory(&tokens, &cmds, tok.str);
+		pset_err(SHELL_NAME, "-c", C_FLAG_ARG_REQ, GENERIC_ERR);
+		return ;
 	}
+	if (!*cmd)
+		return ;
+	init_tokenizer(&tok);
+	tok.str = (char *)cmd;
+	tokens = tokenize(&tok);
+	cmds = parse(tokens);
+	process_cmd(cmds);
+	ft_lstclear(&tokens, ft_str_free);
+	nodeclear(&cmds);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
+	const char	*cmd;
+
 	minishell_init(env);
-	minishell_loop();
-	close(g_mini.stdin_fd);
-	close(g_mini.stdout_fd);
-	rl_clear_history();
-	ft_putendl_fd("exit", STDOUT_FILENO);
+	if (argc > 1 && ft_strncmp(argv[1], "-c", 3) == 0)
+	{
+		cmd = get_cmd(argv);
+		execute_cmd(cmd);
+	}
+	else
+	{
+		minishell_loop();
+		ft_putendl_fd("exit", STDOUT_FILENO);
+	}
+	minishell_destroy();
 	return ((int)g_mini.code);
 }
