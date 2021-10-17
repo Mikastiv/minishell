@@ -23,3 +23,4 @@ Replicates the basic features of bash like execution and pipes
 - $? for last exit status
 - $_ for last binary executed
 - Ctrl+C, Ctrl+\ and Ctrl+D works like in bash
+- Execute command with -c
