@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:56:03 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 02:12:38 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ void	minishell_init(char *const *env)
 		g_mini.user = ft_strdup(str);
 	else
 		g_mini.user = NULL;
-	str = ft_getenv("HOSTNAME");
-	if (!str)
-		str = ft_getenv("NAME");
-	if (str)
-		g_mini.hostname = ft_strdup(str);
-	else
-		g_mini.hostname = NULL;
 	g_mini.code = 0;
 	g_mini.stdin_fd = dup(STDIN_FILENO);
 	g_mini.stdout_fd = dup(STDOUT_FILENO);
@@ -50,7 +43,6 @@ void	minishell_destroy(void)
 	close(g_mini.stdout_fd);
 	ft_strarr_free(g_mini.env);
 	free(g_mini.user);
-	free(g_mini.hostname);
 	rl_clear_history();
 }
 

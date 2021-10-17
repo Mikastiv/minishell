@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:42:47 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 01:26:23 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 02:12:53 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ char	*get_prompt(void)
 		ft_str_append_cstr(prompt, g_mini.user);
 	else
 		ft_str_append_cstr(prompt, "tty");
-	ft_str_add_back(prompt, '@');
-	if (g_mini.hostname)
-		ft_str_append_cstr(prompt, g_mini.hostname);
-	else
-		ft_str_append_cstr(prompt, "unknown");
 	ft_str_append_cstr(prompt, "\001"FT_RST"\002:");
 	dir = getcwd_dir();
 	ft_str_append_cstr(prompt, "\001"FT_BOLD FT_BRED"\002");
