@@ -6,12 +6,13 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 01:31:53 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 16:08:24 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 00:07:36 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "parse.h"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <signal.h>
@@ -59,6 +60,7 @@ static bool	redir_heredoc(t_redir *redir, int fd, bool last)
 	pid_t	pid;
 	int		wstatus;
 
+	redir->file = interpolate(redir->file);
 	signal(SIGINT, nothing);
 	pipe(heredoc_fd);
 	pid = fork();
