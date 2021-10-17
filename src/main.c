@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:03:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/16 20:06:46 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/16 20:23:00 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,9 @@ static void	execute_cmd(const char *cmd)
 
 int	main(int argc, char **argv, char **env)
 {
-	const char	*cmd;
-
 	minishell_init(env);
 	if (argc > 1 && ft_strncmp(argv[1], "-c", 3) == 0)
-	{
-		cmd = get_cmd(argv);
-		execute_cmd(cmd);
-	}
+		execute_cmd(get_cmd(argv));
 	else
 	{
 		minishell_loop();
