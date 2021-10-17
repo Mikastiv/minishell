@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:42:47 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 03:53:15 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 12:54:28 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 #include <libft/libft.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-
-#ifdef __linux__
-# include <linux/limits.h>
-#endif
-
-#ifdef __APPLE__
-# include <limits.h>
-#endif
 
 static char	*getcwd_dir(void)
 {

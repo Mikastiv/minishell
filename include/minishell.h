@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:33:08 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 02:12:43 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/17 12:59:57 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define MINISHELL_H
 
 # include <stdint.h>
+
+# ifdef __linux__
+#  include <linux/limits.h>
+# endif
+
+# ifdef __APPLE__
+#  include <limits.h>
+# endif
 
 # define SHELL_NAME "minishell"
 
