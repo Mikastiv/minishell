@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/17 00:06:35 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:44:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include "parse.h"
 #include "minishell.h"
 #include "exec.h"
+#include "errors.h"
 #include <stdio.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <stdlib.h>
 
 static void	dispatch_cmd(t_node *node)
 {
@@ -38,10 +42,35 @@ static void	dispatch_cmd(t_node *node)
 
 static void	execute(t_node *node)
 {
+	if (!op_control(node))
+		return ;
 	interpolate_arr(node->argv);
 	interpolate_redirs(node->redirs);
 	if (node->argv[0])
 		dispatch_cmd(node);
+}
+
+static void	execute_subshell(t_node *node)
+{
+	pid_t	pid;
+	int		wstatus;
+
+	if (!op_control(node))
+		return ;
+	pid = fork();
+	if (pid == -1)
+	{
+		pset_err(SHELL_NAME, NULL, strerror(errno), GENERIC_ERR);
+		return ;
+	}
+	if (pid == 0)
+	{
+		execute(node);
+		exit((int)g_mini.code);
+	}
+	waitpid(pid, &wstatus, 0);
+	if (WIFEXITED(wstatus))
+		g_mini.code = WEXITSTATUS(wstatus);
 }
 
 static bool	process_heredocs(t_node *cmds)
@@ -65,18 +94,12 @@ void	process_cmd(t_node *cmds)
 	error = process_heredocs(cmds);
 	while (!error && cmds)
 	{
-		error = !op_control(cmds);
-		if (!error)
-		{
+		if (!cmds->next)
 			execute(cmds);
-			if (!cmds->next)
-				break ;
-			fd_reset();
-		}
-		if (error)
-			break ;
+		else
+			execute_subshell(cmds);
+		fd_reset();
 		cmds = cmds->next;
 	}
 	close_pipes(start);
-	fd_reset();
 }
