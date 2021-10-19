@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 00:13:20 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 00:28:12 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-static void	dispatch_cmd(t_node *node, bool update_)
+static void	dispatch_cmd(t_node *node)
 {
 	if (!ft_strncmp(node->argv[0], ECHO, sizeof(ECHO) / sizeof(char)))
 		ft_echo(node);
@@ -39,8 +39,6 @@ static void	dispatch_cmd(t_node *node, bool update_)
 		ft_exit(node);
 	else
 		ft_cmd(node);
-	if (update_)
-		ft_setenv("_", ft_strarr_last(node->argv));
 }
 
 static void	execute(t_node *node, bool update_)
@@ -50,7 +48,11 @@ static void	execute(t_node *node, bool update_)
 	interpolate_arr(node->argv);
 	interpolate_redirs(node->redirs);
 	if (node->argv[0])
-		dispatch_cmd(node, update_);
+	{
+		dispatch_cmd(node);
+		if (update_)
+			ft_setenv("_", ft_strarr_last(node->argv));
+	}
 }
 
 static void	execute_subshell(t_node *node)
