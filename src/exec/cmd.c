@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/18 20:44:28 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:23:10 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool	is_in_cwd(const char *cmd)
 {
 	struct stat	buf;
 
-	if ((*cmd == '.' || *cmd == '/') && stat(cmd, &buf) == 0)
+	if ((*cmd == '.' || ft_strchr(cmd, '/')) && stat(cmd, &buf) == 0)
 	{
 		if (S_ISDIR(buf.st_mode))
 		{
@@ -68,7 +68,7 @@ static char	*get_cmd_path(const char *cmd)
 		return (ft_strdup(cmd));
 	if (errno == EISDIR)
 		return (NULL);
-	path = ft_getenv("PATH");
+	path = ft_getenv(ENV_PATH);
 	if (!path)
 	{
 		pset_err(SHELL_NAME, cmd, CMD_NOT_FOUND, ENVIRONMENT_ERR);

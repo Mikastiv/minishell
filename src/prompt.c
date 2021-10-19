@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:42:47 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 12:54:28 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:18:19 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*getcwd_dir(void)
 
 	if (getcwd(cwd, PATH_MAX) == NULL)
 		return (ft_strdup(""));
-	home = ft_getenv("HOME");
+	home = ft_getenv(ENV_HOME);
 	if (home && ft_strnstr(cwd, home, ft_strlen(home)))
 	{
 		if (home[ft_strlen(home) - 1] == '/')

@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:03:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:18:56 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:16:34 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,43 @@
 
 t_minishell	g_mini;
 
+static bool	valid_flag(const char *str)
+{
+	size_t		i;
+	t_string	flag;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 'c')
+		{
+			flag = ft_str_new(NULL);
+			ft_str_add_back(flag, '-');
+			ft_str_add_back(flag, str[i]);
+			str = ft_str_data(flag);
+			pset_err(SHELL_NAME, str, INVALID_OPTION, GENERIC_ERR);
+			ft_str_free(flag);
+			return (false);
+		}
+		++i;
+	}
+	return (true);
+}
+
 static const char	*get_cmd(char *const *argv)
 {
 	size_t	i;
 
 	i = 1;
-	while (argv[i])
+	while (argv[i] && argv[i][0] == '-')
 	{
-		if (ft_strncmp(argv[i], "-c", 3) != 0)
-			return (argv[i]);
+		if (!valid_flag(&argv[i][1]))
+			return (NULL);
 		++i;
 	}
-	return (NULL);
+	if (!argv[i])
+		pset_err(SHELL_NAME, "-c", C_FLAG_ARG_REQ, GENERIC_ERR);
+	return (argv[i]);
 }
 
 static void	execute_cmd(const char *cmd)
@@ -38,10 +63,7 @@ static void	execute_cmd(const char *cmd)
 	t_node		*cmds;
 
 	if (!cmd)
-	{
-		pset_err(SHELL_NAME, "-c", C_FLAG_ARG_REQ, GENERIC_ERR);
 		return ;
-	}
 	if (!*cmd)
 		return ;
 	init_tokenizer(&tok);
@@ -56,10 +78,10 @@ static void	execute_cmd(const char *cmd)
 int	main(int argc, char **argv, char **env)
 {
 	minishell_init(env);
-	if (argc > 1 && ft_strncmp(argv[1], "-c", 3) == 0)
+	if (argc > 1 && argv[1][0] == '-')
 		execute_cmd(get_cmd(argv));
 	else if (argc > 1)
-		pset_err(SHELL_NAME, argv[1], UNSUPPORTED_ARG_OPT, GENERIC_ERR);
+		pset_err(SHELL_NAME, argv[1], UNSUPPORTED_ARG, GENERIC_ERR);
 	else
 	{
 		minishell_loop();

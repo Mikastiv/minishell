@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 02:12:38 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:09:01 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	minishell_init(char *const *env)
 	char	*str;
 
 	g_mini.env = ft_strarr_dup(env);
-	str = ft_getenv("USER");
+	str = ft_getenv(ENV_USER);
 	if (str)
 		g_mini.user = ft_strdup(str);
 	else

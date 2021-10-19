@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:09:45 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:24:56 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:15:35 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@
 # define WARNING "warning"
 # define HEREDOC_EOF "here-document was delimited by end-of-file"
 # define C_FLAG_ARG_REQ "option requires an argument"
-# define UNSUPPORTED_ARG_OPT "unsupported argument or option"
-
-# define ENV_PWD "PWD"
-# define ENV_OLDPWD "OLDPWD"
-# define ENV_HOME "HOME"
+# define INVALID_OPTION "invalid option"
+# define UNSUPPORTED_ARG "unsupported argument"
 
 void	pset_err(const char *prg, const char *v1, const char *v2, int err);
 void	unexpected_token(const char *token);
