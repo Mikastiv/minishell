@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/18 20:32:47 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:44:21 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,7 @@ static void	dispatch_cmd(t_node *node, bool update_)
 	else if (ft_strncmp(node->argv[0], "exit", 5) == 0)
 		ft_exit(node);
 	else
-	{
-		ft_cmd(node, update_);
-		if (update_ && ft_strarr_size(node->argv) > 1)
-			ft_setenv("_", ft_strarr_last(node->argv));
-		return ;
-	}
+		ft_cmd(node);
 	if (update_)
 		ft_setenv("_", ft_strarr_last(node->argv));
 }
@@ -104,10 +99,10 @@ void	process_cmd(t_node *cmds)
 	error = process_heredocs(cmds);
 	while (!error && cmds)
 	{
-		if (!cmds->next)
-			execute(cmds, !has_pipe);
-		else
+		if (has_pipe)
 			execute_subshell(cmds);
+		else
+			execute(cmds, true);
 		fd_reset();
 		cmds = cmds->next;
 	}
