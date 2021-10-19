@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/18 19:44:25 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:32:47 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "minishell.h"
 #include "exec.h"
 #include "errors.h"
+#include "environment.h"
 #include <stdio.h>
 #include <string.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 
-static void	dispatch_cmd(t_node *node)
+static void	dispatch_cmd(t_node *node, bool update_)
 {
 	if (ft_strncmp(node->argv[0], "echo", 5) == 0)
 		ft_echo(node);
@@ -37,17 +38,24 @@ static void	dispatch_cmd(t_node *node)
 	else if (ft_strncmp(node->argv[0], "exit", 5) == 0)
 		ft_exit(node);
 	else
-		ft_cmd(node);
+	{
+		ft_cmd(node, update_);
+		if (update_ && ft_strarr_size(node->argv) > 1)
+			ft_setenv("_", ft_strarr_last(node->argv));
+		return ;
+	}
+	if (update_)
+		ft_setenv("_", ft_strarr_last(node->argv));
 }
 
-static void	execute(t_node *node)
+static void	execute(t_node *node, bool update_)
 {
 	if (!op_control(node))
 		return ;
 	interpolate_arr(node->argv);
 	interpolate_redirs(node->redirs);
 	if (node->argv[0])
-		dispatch_cmd(node);
+		dispatch_cmd(node, update_);
 }
 
 static void	execute_subshell(t_node *node)
@@ -65,7 +73,7 @@ static void	execute_subshell(t_node *node)
 	}
 	if (pid == 0)
 	{
-		execute(node);
+		execute(node, false);
 		exit((int)g_mini.code);
 	}
 	waitpid(pid, &wstatus, 0);
@@ -88,14 +96,16 @@ void	process_cmd(t_node *cmds)
 {
 	t_node	*start;
 	bool	error;
+	bool	has_pipe;
 
 	start = cmds;
+	has_pipe = cmds->next;
 	init_pipes(start);
 	error = process_heredocs(cmds);
 	while (!error && cmds)
 	{
 		if (!cmds->next)
-			execute(cmds);
+			execute(cmds, !has_pipe);
 		else
 			execute_subshell(cmds);
 		fd_reset();

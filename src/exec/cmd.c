@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/17 00:29:04 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:32:43 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	exec_binary(const char *path, char *const *argv)
 	exit(NOT_EXEC_ERR);
 }
 
-void	ft_cmd(t_node *node)
+void	ft_cmd(t_node *node, bool update_)
 {
 	char	*path;
 	pid_t	pid;
@@ -112,7 +112,8 @@ void	ft_cmd(t_node *node)
 	waitpid(pid, &wstatus, 0);
 	signal(SIGINT, newline);
 	signal(SIGQUIT, SIG_IGN);
-	ft_setenv("_", path);
+	if (update_)
+		ft_setenv("_", path);
 	process_exit_status(wstatus);
 	free(path);
 }

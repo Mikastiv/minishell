@@ -21,6 +21,6 @@ Replicates the basic features of bash like execution and pipes
 - Unix-like pipes
 - Environment variables interpolation (sequence starting with $)
 - $? for last exit status
-- $_ for last binary executed
+- $_ for last command arg value
 - Ctrl+C, Ctrl+\ and Ctrl+D works like in bash
 - Execute command with -c
