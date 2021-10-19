@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:03:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/18 21:16:34 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:41:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	execute_cmd(const char *cmd)
 	nodeclear(&cmds);
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
-	minishell_init(env);
+	minishell_init(envp);
 	if (argc > 1 && argv[1][0] == '-')
 		execute_cmd(get_cmd(argv));
 	else if (argc > 1)

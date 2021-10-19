@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:36:30 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:25:48 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	print_env(void)
 	char	**copy;
 	size_t	i;
 
-	copy = ft_strarr_dup(g_mini.env);
+	copy = ft_strarr_dup(g_mini.envp);
 	ft_strarr_sort(copy);
 	i = 0;
 	while (copy[i])

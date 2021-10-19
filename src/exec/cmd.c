@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/18 21:23:10 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*get_cmd_path(const char *cmd)
 
 static void	exec_binary(const char *path, char *const *argv)
 {
-	execve(path, argv, g_mini.env);
+	execve(path, argv, g_mini.envp);
 	pset_err(SHELL_NAME, path, strerror(errno), NOT_EXEC_ERR);
 	exit(NOT_EXEC_ERR);
 }

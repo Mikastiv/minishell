@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:31:51 by laube             #+#    #+#             */
-/*   Updated: 2021/10/17 00:20:33 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ char	*ft_getenv(const char *var)
 
 	var_name = ft_strjoin(var, "=");
 	i = 0;
-	while (g_mini.env[i])
+	while (g_mini.envp[i])
 	{
-		if (ft_strncmp(g_mini.env[i], var_name, ft_strlen(var_name)) == 0)
+		if (ft_strncmp(g_mini.envp[i], var_name, ft_strlen(var_name)) == 0)
 		{
-			ret = g_mini.env[i] + ft_strlen(var_name);
+			ret = g_mini.envp[i] + ft_strlen(var_name);
 			free(var_name);
 			return (ret);
 		}
@@ -49,19 +49,19 @@ void	ft_setenv(const char *var, const char *value)
 	ft_str_append_cstr(env_value, value);
 	found = false;
 	i = 0;
-	while (g_mini.env[i])
+	while (g_mini.envp[i])
 	{
-		if (ft_strncmp(g_mini.env[i], var_cpy, ft_strlen(var_cpy)) == 0)
+		if (ft_strncmp(g_mini.envp[i], var_cpy, ft_strlen(var_cpy)) == 0)
 		{
-			free(g_mini.env[i]);
-			g_mini.env[i] = ft_str_take(env_value);
+			free(g_mini.envp[i]);
+			g_mini.envp[i] = ft_str_take(env_value);
 			found = true;
 			break ;
 		}
 		++i;
 	}
 	if (!found)
-		g_mini.env = ft_strarr_extend(g_mini.env, ft_str_take(env_value));
+		g_mini.envp = ft_strarr_extend(g_mini.envp, ft_str_take(env_value));
 	free(var_cpy);
 }
 

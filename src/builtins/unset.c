@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:34:45 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:26:36 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	remove_var(const char *var)
 	var_cpy = ft_str_new_copy(var);
 	ft_str_add_back(var_cpy, '=');
 	i = 0;
-	while (g_mini.env[i])
+	while (g_mini.envp[i])
 	{
-		if (ft_str_cmp_cstr(var_cpy, g_mini.env[i], ft_str_len(var_cpy)) == 0)
+		if (ft_str_cmp_cstr(var_cpy, g_mini.envp[i], ft_str_len(var_cpy)) == 0)
 		{
-			ft_strarr_remove(g_mini.env, i);
+			ft_strarr_remove(g_mini.envp, i);
 			ft_str_free(var_cpy);
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/18 21:09:01 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 #include <readline/history.h>
 #include <stdlib.h>
 
-void	minishell_init(char *const *env)
+void	minishell_init(char *const *envp)
 {
 	char	*str;
 
-	g_mini.env = ft_strarr_dup(env);
+	g_mini.envp = ft_strarr_dup(envp);
 	str = ft_getenv(ENV_USER);
 	if (str)
 		g_mini.user = ft_strdup(str);
@@ -41,7 +41,7 @@ void	minishell_destroy(void)
 {
 	close(g_mini.stdin_fd);
 	close(g_mini.stdout_fd);
-	ft_strarr_free(g_mini.env);
+	ft_strarr_free(g_mini.envp);
 	free(g_mini.user);
 	rl_clear_history();
 }
