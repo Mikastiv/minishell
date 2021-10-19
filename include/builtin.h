@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:45:01 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/18 21:20:40 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 00:07:17 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "node.h"
 
+# define ECHO "echo"
 # define PWD "pwd"
 # define CD "cd"
 # define EXPORT "export"

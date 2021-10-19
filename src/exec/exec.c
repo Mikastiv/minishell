@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/18 20:44:21 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 00:13:20 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@
 
 static void	dispatch_cmd(t_node *node, bool update_)
 {
-	if (ft_strncmp(node->argv[0], "echo", 5) == 0)
+	if (!ft_strncmp(node->argv[0], ECHO, sizeof(ECHO) / sizeof(char)))
 		ft_echo(node);
-	else if (ft_strncmp(node->argv[0], "pwd", 4) == 0)
+	else if (!ft_strncmp(node->argv[0], PWD, sizeof(PWD) / sizeof(char)))
 		ft_pwd(node);
-	else if (ft_strncmp(node->argv[0], "cd", 3) == 0)
+	else if (!ft_strncmp(node->argv[0], CD, sizeof(CD) / sizeof(char)))
 		ft_cd(node);
-	else if (ft_strncmp(node->argv[0], "env", 4) == 0)
+	else if (!ft_strncmp(node->argv[0], ENV, sizeof(ENV) / sizeof(char)))
 		ft_env(node);
-	else if (ft_strncmp(node->argv[0], "unset", 6) == 0)
+	else if (!ft_strncmp(node->argv[0], UNSET, sizeof(UNSET) / sizeof(char)))
 		ft_unset(node);
-	else if (ft_strncmp(node->argv[0], "export", 7) == 0)
+	else if (!ft_strncmp(node->argv[0], EXPORT, sizeof(EXPORT) / sizeof(char)))
 		ft_export(node);
-	else if (ft_strncmp(node->argv[0], "exit", 5) == 0)
+	else if (!ft_strncmp(node->argv[0], EXIT, sizeof(EXIT) / sizeof(char)))
 		ft_exit(node);
 	else
 		ft_cmd(node);
