@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:16:38 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:15:32 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,14 @@ void	ft_cmd(t_node *node)
 	if (!path)
 		return ;
 	pid = fork();
+	signal(SIGINT, nothing);
+	signal(SIGQUIT, nothing);
 	if (pid == -1)
 	{
 		free(path);
 		pset_err(SHELL_NAME, NULL, strerror(errno), GENERIC_ERR);
 		return ;
 	}
-	signal(SIGINT, nothing);
-	signal(SIGQUIT, nothing);
 	if (pid == 0)
 		exec_binary(path, node->argv);
 	waitpid(pid, &wstatus, 0);

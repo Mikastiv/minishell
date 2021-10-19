@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 00:28:12 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:16:09 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "exec.h"
 #include "errors.h"
 #include "environment.h"
+#include "signals.h"
 #include <stdio.h>
 #include <string.h>
 #include <sys/wait.h>
@@ -74,8 +75,7 @@ static void	execute_subshell(t_node *node)
 		exit((int)g_mini.code);
 	}
 	waitpid(pid, &wstatus, 0);
-	if (WIFEXITED(wstatus))
-		g_mini.code = WEXITSTATUS(wstatus);
+	process_exit_status(wstatus);
 }
 
 static bool	process_heredocs(t_node *cmds)
@@ -106,6 +106,8 @@ void	process_cmd(t_node *cmds)
 		else
 			execute(cmds, true);
 		fd_reset();
+		if (g_mini.code == QUIT_SIG || g_mini.code == INTERRUPT_SIG)
+			break ;
 		cmds = cmds->next;
 	}
 	close_pipes(start);
