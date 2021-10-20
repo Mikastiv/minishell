@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:10:30 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 20:16:46 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/20 12:20:04 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	is_in_cwd(const char *cmd)
 {
 	struct stat	buf;
 
-	if ((*cmd == '.' || ft_strchr(cmd, '/')) && stat(cmd, &buf) == 0)
+	if (ft_strchr(cmd, '/') && stat(cmd, &buf) == 0)
 	{
 		if (S_ISDIR(buf.st_mode))
 		{
