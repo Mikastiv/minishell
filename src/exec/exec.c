@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 20:21:58 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:41:24 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ static void	execute(t_node *node, bool subshell)
 	if (node->argv[0])
 	{
 		dispatch_cmd(node, subshell);
-		if (!subshell)
-			ft_setenv("_", ft_strarr_last(node->argv));
+		ft_setenv("_", ft_strarr_last(node->argv));
 	}
 }
 
