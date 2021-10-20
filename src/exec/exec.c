@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 19:16:09 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:21:58 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 #include "signals.h"
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 
-static void	dispatch_cmd(t_node *node)
+static void	dispatch_cmd(t_node *node, bool subshell)
 {
 	if (!ft_strncmp(node->argv[0], ECHO, sizeof(ECHO) / sizeof(char)))
 		ft_echo(node);
@@ -38,11 +39,13 @@ static void	dispatch_cmd(t_node *node)
 		ft_export(node);
 	else if (!ft_strncmp(node->argv[0], EXIT, sizeof(EXIT) / sizeof(char)))
 		ft_exit(node);
+	else if (subshell)
+		ft_cmd_subshell(node);
 	else
 		ft_cmd(node);
 }
 
-static void	execute(t_node *node, bool update_)
+static void	execute(t_node *node, bool subshell)
 {
 	if (!op_control(node))
 		return ;
@@ -50,8 +53,8 @@ static void	execute(t_node *node, bool update_)
 	interpolate_redirs(node->redirs);
 	if (node->argv[0])
 	{
-		dispatch_cmd(node);
-		if (update_)
+		dispatch_cmd(node, subshell);
+		if (!subshell)
 			ft_setenv("_", ft_strarr_last(node->argv));
 	}
 }
@@ -63,6 +66,8 @@ static void	execute_subshell(t_node *node)
 
 	if (!op_control(node))
 		return ;
+	signal(SIGINT, nothing);
+	signal(SIGQUIT, nothing);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -71,10 +76,12 @@ static void	execute_subshell(t_node *node)
 	}
 	if (pid == 0)
 	{
-		execute(node, false);
+		execute(node, true);
 		exit((int)g_mini.code);
 	}
 	waitpid(pid, &wstatus, 0);
+	signal(SIGINT, newline);
+	signal(SIGQUIT, SIG_IGN);
 	process_exit_status(wstatus);
 }
 
@@ -104,7 +111,7 @@ void	process_cmd(t_node *cmds)
 		if (has_pipe)
 			execute_subshell(cmds);
 		else
-			execute(cmds, true);
+			execute(cmds, false);
 		fd_reset();
 		if (g_mini.code == QUIT_SIG || g_mini.code == INTERRUPT_SIG)
 			break ;

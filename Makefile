@@ -17,7 +17,7 @@ HFILES		=	tokenizer.h parse.h node.h exec.h minishell.h builtin.h errors.h\
 BUILTIN_C	=	cd.c echo.c env.c exit.c export.c pwd.c unset.c
 PARSING_C	=	interpolation.c interpolation2.c parse.c syntax.c token.c\
 				tokenizer.c tokenizer_utils.c
-EXEC_C		=	cmd.c exec.c pipe.c redir.c heredoc.c pipe_utils.c
+EXEC_C		=	cmd.c cmd_utils.c exec.c pipe.c redir.c heredoc.c pipe_utils.c
 CFILES		=	main.c node.c errors.c environment.c signals.c minishell.c prompt.c
 
 BUILTIN_DIR	=	$(SRC)/builtins
