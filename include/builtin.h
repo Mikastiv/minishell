@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:45:01 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 00:07:17 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 21:13:56 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@
 # define ENV "env"
 # define EXIT "exit"
 
-void	ft_echo(t_node *node);
-void	ft_cd(t_node *node);
-void	ft_unset(t_node *node);
-void	ft_export(t_node *node);
-void	ft_pwd(t_node *node);
-void	ft_env(t_node *node);
-void	ft_exit(t_node *node);
+typedef void	(*t_builtin)(t_node *);
+
+t_builtin	builtin_ptr(const char *str);
+void		ft_echo(t_node *node);
+void		ft_cd(t_node *node);
+void		ft_unset(t_node *node);
+void		ft_export(t_node *node);
+void		ft_pwd(t_node *node);
+void		ft_env(t_node *node);
+void		ft_exit(t_node *node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 01:43:42 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 00:15:25 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 21:10:40 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,11 @@
 #include <stdio.h>
 #include <libft/libft.h>
 
-static bool	is_builtin(const char *str)
-{
-	if (!ft_strncmp(str, ECHO, sizeof(ECHO) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, PWD, sizeof(PWD) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, CD, sizeof(CD) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, ENV, sizeof(ENV) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, UNSET, sizeof(UNSET) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, EXPORT, sizeof(EXPORT) / sizeof(char)))
-		return (true);
-	else if (!ft_strncmp(str, EXIT, sizeof(EXIT) / sizeof(char)))
-		return (true);
-	return (false);
-}
-
 void	pset_err(const char *prg, const char *v1, const char *v2, int err)
 {
 	if (prg)
 	{
-		if (is_builtin(prg))
+		if (builtin_ptr(prg))
 		{
 			ft_putstr_fd(SHELL_NAME, STDERR_FILENO);
 			ft_putstr_fd(": ", STDERR_FILENO);

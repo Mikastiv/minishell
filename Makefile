@@ -14,7 +14,7 @@ MAKELIBFT	=	$(MAKE) -C $(FTDIR)
 
 HFILES		=	tokenizer.h parse.h node.h exec.h minishell.h builtin.h errors.h\
 				environment.h signals.h token.h
-BUILTIN_C	=	cd.c echo.c env.c exit.c export.c pwd.c unset.c
+BUILTIN_C	=	cd.c echo.c env.c exit.c export.c pwd.c unset.c builtin.c
 PARSING_C	=	interpolation.c interpolation2.c parse.c syntax.c token.c\
 				tokenizer.c tokenizer_utils.c
 EXEC_C		=	cmd.c cmd_utils.c exec.c pipe.c redir.c heredoc.c pipe_utils.c
