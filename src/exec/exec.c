@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/19 21:15:28 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/20 17:47:27 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	process_cmd(t_node *cmds)
 	bool	error;
 	bool	has_pipe;
 
+	if (!cmds)
+		return ;
 	start = cmds;
 	has_pipe = cmds->next;
 	init_pipes(start);
