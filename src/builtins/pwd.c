@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:32:32 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 12:54:37 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:59:22 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_pwd(t_node *node)
 	char	cwd[PATH_MAX];
 
 	(void)node;
-	if (getcwd(cwd, PATH_MAX) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 	else
 	{
