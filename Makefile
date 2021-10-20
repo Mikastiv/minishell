@@ -10,7 +10,7 @@ RM			=	rm -rf
 
 FTDIR		=	libft
 LIBFT		=	ft
-MAKELIBFT	=	$(MAKE) -C $(FTDIR)
+MAKELIBFT	=	$(MAKE) --no-print-directory -C $(FTDIR)
 
 HFILES		=	tokenizer.h parse.h node.h exec.h minishell.h builtin.h errors.h\
 				environment.h signals.h token.h
