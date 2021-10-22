@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:33:08 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 20:09:11 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:08:07 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdint.h>
+# include <termios.h>
 
 # ifdef __linux__
 #  include <linux/limits.h>
@@ -35,11 +36,12 @@
 
 typedef struct s_minishell
 {
-	char		**envp;
-	char		*user;
-	uint32_t	code;
-	int			stdin_fd;
-	int			stdout_fd;
+	char			**envp;
+	char			*user;
+	uint32_t		code;
+	int				stdin_fd;
+	int				stdout_fd;
+	struct termios	term;
 }	t_minishell;
 
 extern t_minishell	g_mini;

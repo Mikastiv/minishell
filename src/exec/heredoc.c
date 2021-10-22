@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 01:31:53 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/17 00:17:21 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 15:40:44 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	exec_heredoc(const char *delim, int *heredoc_fd)
 	exit(SUCCESS);
 }
 
-static bool	redir_heredoc(t_redir *redir, int fd, bool last)
+static bool	redir_heredoc(t_redir *redir, int fd)
 {
 	int		heredoc_fd[2];
 	pid_t	pid;
@@ -75,8 +75,7 @@ static bool	redir_heredoc(t_redir *redir, int fd, bool last)
 	signal(SIGINT, newline);
 	if (WIFEXITED(wstatus))
 		g_mini.code = WEXITSTATUS(wstatus);
-	if (last)
-		dup2(heredoc_fd[0], fd);
+	dup2(heredoc_fd[0], fd);
 	close(heredoc_fd[1]);
 	close(heredoc_fd[0]);
 	if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) == INTERRUPT_SIG)
@@ -84,26 +83,16 @@ static bool	redir_heredoc(t_redir *redir, int fd, bool last)
 	return (true);
 }
 
-static bool	heredoc_count(void *redir)
-{
-	t_redir	*r;
-
-	r = redir;
-	return (r->type == HEREDOC);
-}
-
 bool	exec_heredocs(t_list *redirs, int stdin_fd)
 {
 	t_redir	*redir;
-	size_t	count;
 
-	count = ft_lstcount_if(redirs, heredoc_count);
 	while (redirs)
 	{
 		redir = redirs->content;
 		if (redir->type == HEREDOC)
 		{
-			if (!redir_heredoc(redir, stdin_fd, count-- == 1))
+			if (!redir_heredoc(redir, stdin_fd))
 				return (false);
 		}
 		ft_lstnext(&redirs);

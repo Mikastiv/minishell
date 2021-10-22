@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:45:01 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 21:13:56 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:12:53 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include "node.h"
 
-# define ECHO "echo"
-# define PWD "pwd"
-# define CD "cd"
-# define EXPORT "export"
-# define UNSET "unset"
-# define ENV "env"
-# define EXIT "exit"
+# define FT_ECHO "echo"
+# define FT_PWD "pwd"
+# define FT_CD "cd"
+# define FT_EXPORT "export"
+# define FT_UNSET "unset"
+# define FT_ENV "env"
+# define FT_EXIT "exit"
 
 typedef void	(*t_builtin)(t_node *);
 

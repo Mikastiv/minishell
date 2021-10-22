@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:34:03 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:12:16 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_env(t_node *node)
 
 	if (ft_strarr_size(node->argv) > 1)
 	{
-		pset_err(ENV, NULL, TOO_MANY_ARGS, GENERIC_ERR);
+		pset_err(FT_ENV, NULL, TOO_MANY_ARGS, GENERIC_ERR);
 		return ;
 	}
 	i = 0;

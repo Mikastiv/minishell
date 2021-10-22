@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:41:07 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:08:35 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	minishell_init(char *const *envp)
 {
 	char	*str;
 
+	tcgetattr(STDIN_FILENO, &g_mini.term);
 	g_mini.envp = ft_strarr_dup(envp);
 	str = ft_getenv(ENV_USER);
 	if (str)
@@ -44,6 +45,7 @@ void	minishell_destroy(void)
 	ft_strarr_free(g_mini.envp);
 	free(g_mini.user);
 	rl_clear_history();
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term);
 }
 
 static char	*get_line(char *line)

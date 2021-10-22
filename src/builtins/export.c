@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:36:30 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/19 14:42:11 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:11:10 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_export(t_node *node)
 		var = var_name(node->argv[i]);
 		if (!is_valid_var_name(var))
 		{
-			pset_err(EXPORT, node->argv[i], BAD_IDENT, GENERIC_ERR);
+			pset_err(FT_EXPORT, node->argv[i], BAD_IDENT, GENERIC_ERR);
 			++i;
 			continue ;
 		}
