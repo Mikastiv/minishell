@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 00:29:29 by laube             #+#    #+#             */
-/*   Updated: 2021/10/20 17:47:27 by mleblanc         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:56:32 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	dispatch_cmd(t_node *node, bool subshell)
 
 static void	execute(t_node *node, bool subshell)
 {
-	if (!op_control(node))
+	if (!subshell && !op_control(node))
 		return ;
 	interpolate_arr(node->argv);
 	interpolate_redirs(node->redirs);
