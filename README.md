@@ -1,10 +1,18 @@
 # minishell
+
 A smaller shell
 
 ## Summary
+
 Replicates the basic features of bash like execution and pipes
 
+## Build
+
+MacOS -> ```make``` <br/>
+Linux -> ```make linux```
+
 ## Features
+
 - Working history
 - Tab autocompletion
 - Launch programs (absolute or relative path using PATH)
@@ -24,3 +32,7 @@ Replicates the basic features of bash like execution and pipes
 - $_ for last command arg value
 - Ctrl+C, Ctrl+\ and Ctrl+D works like in bash
 - Execute command with -c
+
+## Screenshot
+
+![Screenshot](sc.png)

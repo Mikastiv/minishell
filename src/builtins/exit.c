@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:08:24 by mleblanc          #+#    #+#             */
-/*   Updated: 2021/10/22 16:13:05 by mleblanc         ###   ########.fr       */
+/*   Updated: 2022/05/22 16:26:25 by mleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 static bool	is_number(const char *str)
 {
-	size_t	i;
-
-	i = 0;
 	if (*str == '-' || *str == '+')
 		++str;
 	return (ft_strall(str, ft_isdigit));
@@ -40,7 +37,7 @@ void	ft_exit(t_node *node)
 		return ;
 	}
 	else
-		g_mini.code = ft_atoi(node->argv[1]) % 256;
+		g_mini.code = (uint32_t)(ft_atoi(node->argv[1]) % 256);
 	if (node->next)
 		return ;
 	exit((int)g_mini.code);
